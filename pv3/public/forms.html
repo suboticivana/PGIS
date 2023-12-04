@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Forms</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<link rel="stylesheet" type ="text/css" href = "CSS/styless.css">
+</head>
+
+<body>
+<center> <h1> Programiranje i razvoj GIS aplikacija</h1> </center>
+<center> <h3> Forma</h3></center>
+<form>
+  <div class="form-group">
+    <label for="imeprezime">Ime i prezime</label>
+    <input type="text" class="form-control" id="imeprezime" aria-describedby="emailHelp" placeholder="Unesi ime i prezime">
+    <small id="nameError" class="error_class"></small>
+  </div>
+  <div class="form-group">
+    <label for="Email">email</label>
+    <input type="email" class="form-control" id="email" placeholder="Unesi email">
+    <small id="emailError" class="error_class"></small>
+  </div>
+  <center>
+	  <button type="button" class="btn btn-dark" onclick="validateForm()">Potvrdi</button>
+  </center>
+  
+</form>
+
+<div id = "message"></div>
+<script>
+	function validateForm(){
+		const name = document.getElementById('imeprezime').value
+		const email = document.getElementById('email').value 
+		const nameError = document.getElementById('nameError')
+		const emailError = document.getElementById('emailError')
+		const message = document.getElementById('message')
+		
+		nameError.innerHTML =''
+		emailError.innerHTML = ''
+		
+		
+		
+		if (name == '' && email == ''){
+			nameError.innerHTML = 'Ime  i prezime nisu uneti'
+			emailError.innerHTML = 'Email nije unet'
+			return 
+		}
+		if (name == ''){
+			nameError.innerHTML = 'Ime  i prezime nisu uneti'
+			return
+		}
+		if(email ==''){
+			emailError.innerHTML = 'Email nije unet'
+			return
+		}
+		if(!validateEmail(email)){
+			emailError.innerHTML = 'Email nije ispravan'
+			return
+		}
+		//alert ("Uspesno popunjena forma. Ime: "+name+ " email: "+email)
+		name.innerHTML = ""
+		email.innerHTML = ""
+		message.innerHTML = 'Uspesno popunjena forma.<br> Ime: '+name+ ' <br>email: '+email
+	}
+	function validateEmail(email){
+		const re = /\S+\@\S+\.\S+/
+		return re.test(email)
+		
+	}
+</script>
+</body>
+</html>
